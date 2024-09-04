@@ -1,18 +1,19 @@
-<div class="login">
-  <h1>Login</h1>
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <form class="bg-light rounded p-3">
+    <div class="form-group mb-3">
+      <label class="mb-2" for="usuario">Usuario</label>
+      <input type="text" class="form-control" id="usuario" [(ngModel)]="usuario" name="usuario">
+    </div>
 
-  <div class="user">
-    <label>Usuario</label>
-    <input type="text" [(ngModel)]="usuario">
-  </div>
+    <div class="form-group mb-3">
+      <label class="mb-2" for="password">Password</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password">
+    </div>
 
-  <div class="password">
-    <label>Password</label>
-    <input type="password" [(ngModel)]="password">
-  </div>
-  <button class="btn btn-primary" (click)="validar()">Login</button>
+    <button (click)="validar()" class="btn btn-primary">Login</button>
 
-  <div *ngIf="!loginExitoso">
-    <p>Usuario y contraseña incorrectos</p>
-  </div>
+    <div *ngIf="!loginExitoso">
+      <small class="form-text text-muted">Usuario y contraseña incorrectos</small>
+    </div>
+  </form>
 </div>

@@ -14,6 +14,7 @@ export const routes: Routes = [
   {path: 'home', component: HomeComponent,
     children:
       [
+        {path: '', redirectTo: 'home', pathMatch: "full"},
         {path: "about", component: AboutComponent},
         {path: "juego1", component: Juego1Component},
         {path: "juego2", component: Juego2Component},
