@@ -10,7 +10,7 @@
     <label>Password</label>
     <input type="password" [(ngModel)]="password">
   </div>
-  <button (click)="validar()">Login</button>
+  <button class="btn btn-primary" (click)="validar()">Login</button>
 
   <div *ngIf="!loginExitoso">
     <p>Usuario y contraseña incorrectos</p>
