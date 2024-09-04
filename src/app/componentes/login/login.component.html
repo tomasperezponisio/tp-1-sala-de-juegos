@@ -1,0 +1,18 @@
+<div class="login">
+  <h1>Login</h1>
+
+  <div class="user">
+    <label>Usuario</label>
+    <input type="text" [(ngModel)]="usuario">
+  </div>
+
+  <div class="password">
+    <label>Password</label>
+    <input type="password" [(ngModel)]="password">
+  </div>
+  <button (click)="validar()">Login</button>
+
+  <div *ngIf="!loginExitoso">
+    <p>Usuario y contraseña incorrectos</p>
+  </div>
+</div>
