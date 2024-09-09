@@ -7,6 +7,7 @@ import {Juego1Component} from "./componentes/juego1/juego1.component";
 import {Juego2Component} from "./componentes/juego2/juego2.component";
 import {Juego3Component} from "./componentes/juego3/juego3.component";
 import {Juego4Component} from "./componentes/juego4/juego4.component";
+import {WelcomeComponent} from "./componentes/welcome/welcome.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: "full"},
@@ -15,6 +16,7 @@ export const routes: Routes = [
     children:
       [
         {path: '', redirectTo: 'home', pathMatch: "full"},
+        {path: "welcome", component: WelcomeComponent},
         {path: "about", component: AboutComponent},
         {path: "juego1", component: Juego1Component},
         {path: "juego2", component: Juego2Component},

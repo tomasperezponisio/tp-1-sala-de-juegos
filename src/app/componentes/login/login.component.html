@@ -10,7 +10,9 @@
       <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password">
     </div>
 
-    <button (click)="validar()" class="btn btn-primary">Login</button>
+    <button (click)="validar()" class="btn btn-primary btn-space">Login</button>
+
+    <button (click)="autoCompletar()" class="btn btn-secondary">Autocompletar</button>
 
     <div *ngIf="!loginExitoso">
       <small class="form-text text-muted">Usuario y contraseña incorrectos</small>

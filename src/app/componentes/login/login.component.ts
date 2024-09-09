@@ -25,9 +25,14 @@ export class LoginComponent {
   validar() {
     if (this.usuario === 'admin' && this.password === 'password') {
       this.loginExitoso = true;
-      this.router.navigate(['/home']);  // Navigate to the 'home' route
+      this.router.navigate(['/home/welcome']);  // Navigate to the 'home' route
     } else {
       this.loginExitoso = false;
     }
+  }
+
+  autoCompletar() {
+    this.usuario = 'admin';
+    this.password = 'password';
   }
 }
