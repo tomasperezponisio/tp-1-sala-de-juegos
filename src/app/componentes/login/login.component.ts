@@ -3,6 +3,7 @@ import {FormsModule} from "@angular/forms";
 import {HomeComponent} from "../home/home.component";
 import {Router} from "@angular/router";
 import {NgIf} from "@angular/common";
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -27,12 +28,21 @@ export class LoginComponent {
       this.loginExitoso = true;
       this.router.navigate(['/home/welcome']);  // Navigate to the 'home' route
     } else {
-      this.loginExitoso = false;
+      this.error();
     }
   }
 
   autoCompletar() {
     this.usuario = 'admin';
     this.password = 'password';
+  }
+
+  error() {
+    Swal.fire({
+      title: 'Error!',
+      text: 'Usuario y contraseña incorrectos.',
+      icon: 'error',
+      confirmButtonText: 'Cool'
+    })
   }
 }
