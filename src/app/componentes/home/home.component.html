@@ -1,37 +1,46 @@
-<div class="container pt-3">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light rounded p-2">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="welcome" routerLinkActive="active-route">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="juego1" routerLinkActive="active-route">Juego 1</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="juego2" routerLinkActive="active-route">Juego 2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="juego3" routerLinkActive="active-route">Juego 3</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="juego4" routerLinkActive="active-route">Juego 4</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="about">Sobre mí</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="../login">Cerrar Sesión</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <router-outlet></router-outlet>
-</div>
+<div class="container bg-light rounded mt-3 p-3" xmlns="http://www.w3.org/1999/html">
+  <h1>Home / Bienvenido: ...</h1>
 
+  <div class="row">
+    <!-- First column -->
+    <div class="col-md-6 mb-3">
+      <div class="p-3 text-white rounded">
+        <a [routerLink]="['/ahorcado']">
+          <img ngSrc="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/ahorcado.png?alt=media&token=8c057996-9dbd-417a-9db8-a2cbf302ae1a" alt="Ahorcado" class="img-fluid rounded" height="1024" width="1024">
+        </a>
+      </div>
+    </div>
+
+    <!-- Second column -->
+    <div class="col-md-6 mb-3">
+      <div class="p-3 text-white rounded">
+        <a [routerLink]="['/preguntados']">
+          <img ngSrc="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/preguntados.png?alt=media&token=e0d4c561-d771-4b10-885b-eb21e17d1503" alt="Preguntados" class="img-fluid rounded" height="1024"
+             width="1024">
+        </a>
+      </div>
+    </div>
+
+    <!-- Third column -->
+    <div class="col-md-6 mb-3">
+      <div class="p-3 text-white rounded">
+        <a [routerLink]="['/mayoromenor']">
+          <img ngSrc="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/mayor-o-menor.png?alt=media&token=22588fc5-0ba5-4c7f-be00-59b7215d5bd5" alt="Mayor o Menor" class="img-fluid rounded" height="1024"
+             width="1024">
+        </a>
+      </div>
+    </div>
+
+    <!-- Fourth column -->
+    <div class="col-md-6 mb-3">
+      <div class="p-3 text-white rounded">
+        <a [routerLink]="['/juegodereflejos']">
+        <img ngSrc="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/juego-de-reflejos.png?alt=media&token=91eb421c-5aa8-45c8-af1f-3a02dd27e199" alt="Juego de Reflejos" class="img-fluid rounded" height="1024"
+             width="1024">
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
