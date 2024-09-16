@@ -7,9 +7,11 @@ import {AhorcadoComponent} from "./componentes/ahorcado/ahorcado.component";
 import {MayorOMenorComponent} from "./componentes/mayor-o-menor/mayor-o-menor.component";
 import {PreguntadosComponent} from "./componentes/preguntados/preguntados.component";
 import {JuegoDeReflejosComponent} from "./componentes/juego-de-reflejos/juego-de-reflejos.component";
+import {RegisterComponent} from "./componentes/register/register.component";
 
 export const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: "full"},
+  {path: '', redirectTo: '/home', pathMatch: "full"},
+  {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path: "about", component: AboutComponent},

@@ -6,34 +6,34 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!(logueado$ | async)">
           <a class="nav-link" routerLink="login" routerLinkActive="active-route">Login</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="" routerLinkActive="active-route">Register</a>
+        <li class="nav-item" *ngIf="!(logueado$ | async)">
+          <a class="nav-link" routerLink="register" routerLinkActive="active-route">Register</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item active" *ngIf="(logueado$ | async)">
           <a class="nav-link" routerLink="home" routerLinkActive="active-route">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="(logueado$ | async)">
           <a class="nav-link" routerLink="ahorcado" routerLinkActive="active-route">Ahorcado</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="(logueado$ | async)">
           <a class="nav-link" routerLink="preguntados" routerLinkActive="active-route">Preguntados</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="(logueado$ | async)">
           <a class="nav-link" routerLink="mayoromenor" routerLinkActive="active-route">Mayor o Menor</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="(logueado$ | async)">
           <a class="nav-link" routerLink="juegodereflejos" routerLinkActive="active-route">Juego de Reflejos</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="(logueado$ | async)">
           <a class="nav-link" routerLink="about">Sobre mí</a>
         </li>
       </ul>
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto" *ngIf="(logueado$ | async)">
         <li class="nav-item">
-          <a class="nav-link" routerLink="../login">Cerrar Sesión</a>
+          <a class="nav-link" (click)="closeSession()" >Cerrar Sesión</a>
         </li>
       </ul>
     </div>

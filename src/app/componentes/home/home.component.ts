@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {NgOptimizedImage} from "@angular/common";
+import { Auth, user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,21 @@ import {NgOptimizedImage} from "@angular/common";
   templateUrl: './home.component.html',
   styleUrl: './home.component.less'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  usuarioLogueado: string | null | undefined;
+
+  constructor(
+    private router: Router,
+    private auth: Auth
+  ) {}
+
+  ngOnInit(): void {
+    console.log('email logueado: ' + this.auth.currentUser?.email)
+    this.usuarioLogueado = this.auth.currentUser?.email;
+    if (!this.auth.currentUser?.email) {
+      this.router.navigate(['./login']);
+    }
+
+  }
 
 }
