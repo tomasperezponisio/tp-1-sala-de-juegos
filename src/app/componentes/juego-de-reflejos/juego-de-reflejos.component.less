@@ -1,0 +1,48 @@
+.container {
+  position: relative;
+  height: 600px; /* Altura del área de juego */
+}
+
+button {
+  width: 80px;
+  height: 80px;
+}
+
+.obstacle {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+}
+
+/* Define keyframes for zoom-in and zoom-out */
+@keyframes zoomIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* Apply zoom-in on appearing */
+.zoom-in {
+  animation: zoomIn 0.2s forwards;
+}
+
+/* Apply zoom-out on disappearing */
+.zoom-out {
+  animation: zoomOut 0.2s forwards;
+}

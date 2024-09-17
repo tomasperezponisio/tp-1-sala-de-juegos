@@ -1,9 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {HomeComponent} from "../home/home.component";
 import {Router} from "@angular/router";
 import {NgIf} from "@angular/common";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import {Auth, signInWithEmailAndPassword} from '@angular/fire/auth';
+import {addDoc, collection, collectionData, Firestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
@@ -16,33 +18,102 @@ import Swal from 'sweetalert2'
   templateUrl: './login.component.html',
   styleUrl: './login.component.less'
 })
-export class LoginComponent {
-  usuario!: string;
+export class LoginComponent implements OnInit {
+  email!: string;
   password!: string;
-  loginExitoso: boolean = false;
+  msjError: string = "";
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    public auth: Auth,
+    private firestore: Firestore) {
+  }
 
-  validar() {
-    if (this.usuario === 'admin' && this.password === 'password') {
-      this.loginExitoso = true;
-      this.router.navigate(['/home/welcome']);  // Navigate to the 'home' route
-    } else {
-      this.error();
+  login() {
+
+    if (!this.email || !this.email.trim()) {
+      this.msjError = "Ingrese email";
+      this.showErrorAlert(this.msjError);
+      return;
+    } else if (!this.isValidEmail(this.email)) {
+      this.msjError = "Email no válido";
+      this.showErrorAlert(this.msjError);
+      return;
     }
+
+    if (!this.password || !this.password.trim()) {
+      this.msjError = "Ingrese contraseña";
+      this.showErrorAlert(this.msjError);
+      return;
+    }
+
+    signInWithEmailAndPassword(this.auth, this.email, this.password)
+      .then(() => {
+        // logueo el usuario que ingresó
+        let col = collection(this.firestore, 'logins');
+        addDoc(col, {fecha: new Date(), "usuario": this.email})
+
+        // mando al home
+        this.router.navigate(['/home']);
+      })
+      .catch((e) => {
+        switch (e.code) {
+          case "auth/invalid-email":
+            this.msjError = "Email no registrado";
+            break;
+          case "auth/user-not-found":
+            this.msjError = "Email no registrado";
+            break;
+          case "auth/wrong-password":
+            this.msjError = "Contraseña incorrecta";
+            break;
+          case "auth/invalid-credential":
+            this.msjError = "Credenciales inválidas";
+            break;
+          default:
+            this.msjError = "Error al loguearse";
+            console.log(e.code);
+            break;
+        }
+        this.showErrorAlert(this.msjError);
+      })
   }
 
   autoCompletar() {
-    this.usuario = 'admin';
-    this.password = 'password';
+    this.email = 'admin@gmail.com';
+    this.password = 'Admin2024';
   }
 
-  error() {
+  private showErrorAlert(message: string) {
     Swal.fire({
       title: 'Error!',
-      text: 'Usuario y contraseña incorrectos.',
+      text: message,
       icon: 'error',
-      confirmButtonText: 'Cool'
-    })
+      confirmButtonText: 'Cerrar'
+    });
   }
+
+  private isValidEmail(email: string): boolean {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
+  }
+
+  ngOnInit(): void {
+    console.log('login onInit - email logueado: ' + this.auth.currentUser?.email);
+    if (this.auth.currentUser?.email) {
+      this.router.navigate(['./home']);
+    }
+  }
+
+  // TODO: try this:
+  // ngOnInit(): void {
+  //   this.user$.subscribe(user => {
+  //     if (user) {
+  //       console.log(`User is logged in: ${user.email}`);
+  //       this.router.navigate(['./home']);
+  //     } else {
+  //       console.log('No user is logged in');
+  //     }
+  //   });
+  // }
 }
