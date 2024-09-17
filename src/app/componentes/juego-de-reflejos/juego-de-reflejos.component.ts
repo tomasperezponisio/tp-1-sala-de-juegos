@@ -2,24 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, NgStyle} from "@angular/common";
 import Swal from 'sweetalert2'
 
-/**
- * JuegoDeReflejosComponent handles the logic for the game, including starting
- * and ending the game, updating the score, managing obstacles, and handling
- * user interactions.
- *
- * @Component({
- *  selector: 'app-juego-de-reflejos',
- *  standalone: true,
- *  imports: [
- *    NgStyle,
- *    NgIf,
- *    NgForOf,
- *    NgOptimizedImage
- *  ],
- *  templateUrl: './juego-de-reflejos.component.html',
- *  styleUrl: './juego-de-reflejos.component.less'
- * })
- */
 @Component({
   selector: 'app-juego-de-reflejos',
   standalone: true,
@@ -35,6 +17,7 @@ import Swal from 'sweetalert2'
 })
 
 export class JuegoDeReflejosComponent implements OnInit {
+  //TODO: fix start/end of the game
   score = 0;
   timeLeft = 30;
   gameOver = false;
@@ -59,14 +42,6 @@ export class JuegoDeReflejosComponent implements OnInit {
     this.startGame();
   }
 
-  /**
-   * Initializes and starts the game.
-   * This method will reset the game state, start the game timer,
-   * move the player's button to the starting position, and generate
-   * a random number of obstacles within the specified range.
-   *
-   * @return {void} This method does not return a value.
-   */
   startGame(): void {
     this.resetGame();
     this.startTimer();
@@ -77,11 +52,6 @@ export class JuegoDeReflejosComponent implements OnInit {
   }
 
   // Al hacer clic en el botón, aumentar el puntaje y mover el botón
-  /**
-   * Handles the button click event. This method increments the score, moves the button to a new location, and generates a random number of obstacles within a specified range.
-   *
-   * @return {void} This method does not return a value.
-   */
   onButtonClick(): void {
     this.score++;
     this.moveButton();
@@ -91,13 +61,6 @@ export class JuegoDeReflejosComponent implements OnInit {
   }
 
   // Penalizar al jugador si hace clic en un obstáculo
-  /**
-   * Handles the event when an obstacle is clicked in the game. This method
-   * triggers a SweetAlert popup indicating the game is over and then
-   * proceeds to end the game by calling the endGame method.
-   *
-   * @return {void} No return value.
-   */
   onObstacleClick(): void {
     Swal.fire({
       title: '¡Oh no!',
@@ -109,15 +72,6 @@ export class JuegoDeReflejosComponent implements OnInit {
   }
 
   // Mover el botón a una posición aleatoria dentro del área de juego
-  /**
-   * Moves the button to a new random position within the game area container.
-   *
-   * This method calculates random positions for the button based on the dimensions
-   * of the game area container, ensuring the new position is within the boundaries
-   * of the container.
-   *
-   * @return {void} The method does not return any value.
-   */
   moveButton(): void {
     const gameArea = document.querySelector('.container');
     if (gameArea) {
@@ -132,12 +86,6 @@ export class JuegoDeReflejosComponent implements OnInit {
   }
 
   // Generar posiciones aleatorias para los obstáculos
-  /**
-   * Generates a specified number of obstacles within the game area.
-   *
-   * @param {number} obstaclesCount - The number of obstacles to generate.
-   * @return {void}
-   */
   generateObstacles(obstaclesCount: number): void {
     this.obstacles = [];  // Reiniciar obstáculos
 
@@ -179,12 +127,6 @@ export class JuegoDeReflejosComponent implements OnInit {
   }
 
   // Iniciar el temporizador
-  /**
-   * Starts the game timer with a countdown of 30 seconds.
-   * Initializes the score to zero and sets the game status to active.
-   * Decrements the time left by 1 every second, and ends the game when time runs out.
-   * @return {void}
-   */
   startTimer(): void {
     this.timeLeft = 30;
     this.score = 0;
@@ -199,12 +141,6 @@ export class JuegoDeReflejosComponent implements OnInit {
   }
 
   // Terminar el juego
-  /**
-   * Ends the game by setting the game state to 'over' and hiding the relevant UI elements.
-   * Additionally, stops any ongoing game-related timers.
-   *
-   * @return {void}
-   */
   endGame(): void {
     this.gameOver = true;
     this.showButton = false;
@@ -212,14 +148,6 @@ export class JuegoDeReflejosComponent implements OnInit {
   }
 
   // Reiniciar el juego
-  /**
-   * Resets the game to its initial state.
-   *
-   * This method sets the score to 0, resets the timer to 30 seconds,
-   * sets the gameOver flag to false, and clears the timer interval.
-   *
-   * @return {void} No return value.
-   */
   resetGame(): void {
     this.score = 0;
     this.timeLeft = 30;

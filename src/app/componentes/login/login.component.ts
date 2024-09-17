@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 
   login() {
 
-    // Step 1: Check if the email is missing or not in a valid format
     if (!this.email || !this.email.trim()) {
       this.msjError = "Ingrese email";
       this.showErrorAlert(this.msjError);
@@ -42,7 +41,6 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    // Step 2: Check if the password is missing
     if (!this.password || !this.password.trim()) {
       this.msjError = "Ingrese contraseña";
       this.showErrorAlert(this.msjError);
@@ -51,26 +49,25 @@ export class LoginComponent implements OnInit {
 
     signInWithEmailAndPassword(this.auth, this.email, this.password)
       .then(() => {
-        // mando al home
-        this.router.navigate(['/home']);
-
         // logueo el usuario que ingresó
         let col = collection(this.firestore, 'logins');
         addDoc(col, {fecha: new Date(), "usuario": this.email})
 
+        // mando al home
+        this.router.navigate(['/home']);
       })
       .catch((e) => {
         switch (e.code) {
           case "auth/invalid-email":
             this.msjError = "Email no registrado";
             break;
-          case "auth/user-not-found":  // Non-registered email
+          case "auth/user-not-found":
             this.msjError = "Email no registrado";
             break;
-          case "auth/wrong-password":  // Incorrect password for an existing user
+          case "auth/wrong-password":
             this.msjError = "Contraseña incorrecta";
             break;
-          case "auth/invalid-credential":  // General invalid credential error
+          case "auth/invalid-credential":
             this.msjError = "Credenciales inválidas";
             break;
           default:
@@ -102,7 +99,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('email logueado: ' + this.auth.currentUser?.email);
+    console.log('login onInit - email logueado: ' + this.auth.currentUser?.email);
     if (this.auth.currentUser?.email) {
       this.router.navigate(['./home']);
     }

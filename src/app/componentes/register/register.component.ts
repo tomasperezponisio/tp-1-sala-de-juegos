@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
 import Swal from 'sweetalert2';
+import {addDoc, collection, Firestore} from "@angular/fire/firestore";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -22,7 +24,10 @@ export class RegisterComponent {
   msjError: string = "";
   msjExito: string = "";
 
-  constructor(public auth: Auth) {
+  constructor(
+    private router: Router,
+    public auth: Auth,
+    private firestore: Firestore) {
   }
 
   register() {
@@ -30,6 +35,19 @@ export class RegisterComponent {
       if (res.user.email !== null) this.loggedUser = res.user.email;
       this.msjExito = 'Usuario: ' + res.user.email + ' registrado';
       this.showSuccessAlert(this.msjExito);
+      signInWithEmailAndPassword(this.auth, this.email, this.password)
+        .then((res) => {
+          // logueo el usuario que ingresó
+          let col = collection(this.firestore, 'logins');
+          addDoc(col, {fecha: new Date(), "usuario": this.email})
+
+          // mando al home
+          this.router.navigate(['/home']);
+      })
+        .catch((e) => {
+          this.msjError = e.code;
+          this.showErrorAlert(this.msjError);
+      });
 
     }).catch((e) => {
 

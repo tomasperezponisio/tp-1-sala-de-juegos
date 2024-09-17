@@ -27,6 +27,7 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('nav-bar onInit - email logueado: ' + this.logueado$)
     this.logueado$ = user(this.auth).pipe(map(user => !!user));  // Updates logueado$ based on user's auth state
   }
 

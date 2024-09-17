@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('email logueado: ' + this.auth.currentUser?.email)
+    console.log('home onInit - email logueado: ' + this.auth.currentUser?.email)
     this.usuarioLogueado = this.auth.currentUser?.email;
     if (!this.auth.currentUser?.email) {
       this.router.navigate(['./login']);
