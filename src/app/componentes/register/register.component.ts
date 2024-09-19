@@ -4,6 +4,7 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from
 import Swal from 'sweetalert2';
 import {addDoc, collection, Firestore} from "@angular/fire/firestore";
 import {Router} from "@angular/router";
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-register',
@@ -27,10 +28,51 @@ export class RegisterComponent {
   constructor(
     private router: Router,
     public auth: Auth,
-    private firestore: Firestore) {
+    private firestore: Firestore,
+    private loginService: LoginService) {
   }
 
   register() {
+    if (this.password !== this.passwordCheck) {
+      this.showErrorAlert('La contraseña no coincide');
+      return;
+    }
+
+    this.loginService.register(this.email, this.password)
+      .then(({ success, message }) => {
+        if (success) {
+          this.msjExito = 'Usuario: ' + this.email + ' registrado';
+          this.showSuccessAlert(this.msjExito);
+
+          this.loginService.login(this.email, this.password)
+            .then((loginResponse) => {
+              if (loginResponse.success) {
+                // log the user in
+                this.router.navigate(['/home']);
+              } else {
+                this.msjError = loginResponse.message;
+                this.showErrorAlert(this.msjError);
+              }
+            })
+            .catch(loginError => {
+              this.msjError = loginError.message;
+              this.showErrorAlert(this.msjError);
+            });
+        } else {
+          this.msjError = message;
+          this.showErrorAlert(this.msjError);
+        }
+      })
+      .catch((error) => {
+        // handle additional errors if necessary
+        this.msjError = error.message;
+        this.showErrorAlert(this.msjError);
+      });
+  }
+
+
+
+/*  register() {
     createUserWithEmailAndPassword(this.auth, this.email, this.password).then((res) => {
       if (res.user.email !== null) this.loggedUser = res.user.email;
       this.msjExito = 'Usuario: ' + res.user.email + ' registrado';
@@ -66,7 +108,7 @@ export class RegisterComponent {
       this.showErrorAlert(this.msjError);
 
     });
-  }
+  }*/
 
   private showErrorAlert(message: string) {
     Swal.fire({

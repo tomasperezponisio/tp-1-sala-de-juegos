@@ -6,23 +6,16 @@
     </div>
 
     <div class="form-group mb-3">
-      <label class="mb-2" for="password">Password</label>
+      <label class="mb-2" for="password">Contraseña</label>
       <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password">
     </div>
 
     <div class="form-group mb-3">
-      <label class="mb-2" for="passwordCheck">Confirme el password</label>
+      <label class="mb-2" for="passwordCheck">Confirme la Contraseña</label>
       <input type="password" class="form-control" id="passwordCheck" [(ngModel)]="passwordCheck" name="passwordCheck">
     </div>
 
     <button (click)="register()" class="btn btn-primary btn-space">Registrarse</button>
-
-<!--    @if (loggedUser != ""){-->
-<!--      <h2 class="text-center text-primary">Usuario registrado: {{loggedUser}}</h2>-->
-<!--    }-->
-<!--    @if(flagError){-->
-<!--      <p class="text-center text-primary">{{msjError}}</p>-->
-<!--    }-->
 
   </form>
 </div>

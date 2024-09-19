@@ -4,8 +4,7 @@ import {HomeComponent} from "../home/home.component";
 import {Router} from "@angular/router";
 import {NgIf} from "@angular/common";
 import Swal from 'sweetalert2';
-import {Auth, signInWithEmailAndPassword} from '@angular/fire/auth';
-import {addDoc, collection, collectionData, Firestore} from '@angular/fire/firestore';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +21,11 @@ export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
   msjError: string = "";
+  msjExito: string = "";
 
   constructor(
     private router: Router,
-    public auth: Auth,
-    private firestore: Firestore) {
+    private loginService: LoginService) {
   }
 
   login() {
@@ -47,36 +46,19 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    signInWithEmailAndPassword(this.auth, this.email, this.password)
-      .then(() => {
-        // logueo el usuario que ingresó
-        let col = collection(this.firestore, 'logins');
-        addDoc(col, {fecha: new Date(), "usuario": this.email})
+    this.loginService.login(this.email, this.password)
+      .then((result) => {
+        if (result.success) {
+          // this.msjExito = result.message;
+          // this.showSuccessAlert(this.msjExito).then(() => {
+          //   this.router.navigate(['/home']);
+          // });
+          this.router.navigate(['/home']);
 
-        // mando al home
-        this.router.navigate(['/home']);
-      })
-      .catch((e) => {
-        switch (e.code) {
-          case "auth/invalid-email":
-            this.msjError = "Email no registrado";
-            break;
-          case "auth/user-not-found":
-            this.msjError = "Email no registrado";
-            break;
-          case "auth/wrong-password":
-            this.msjError = "Contraseña incorrecta";
-            break;
-          case "auth/invalid-credential":
-            this.msjError = "Credenciales inválidas";
-            break;
-          default:
-            this.msjError = "Error al loguearse";
-            console.log(e.code);
-            break;
+        } else {
+          this.showErrorAlert(result.message);
         }
-        this.showErrorAlert(this.msjError);
-      })
+      });
   }
 
   autoCompletar() {
@@ -93,27 +75,24 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  private showSuccessAlert(message: string) {
+    return Swal.fire({
+      title: 'Login exisoto!',
+      text: message,
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+  }
+
   private isValidEmail(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailPattern.test(email);
   }
 
   ngOnInit(): void {
-    console.log('login onInit - email logueado: ' + this.auth.currentUser?.email);
+   /* console.log('login onInit - email logueado: ' + this.auth.currentUser?.email);
     if (this.auth.currentUser?.email) {
       this.router.navigate(['./home']);
-    }
+    }*/
   }
-
-  // TODO: try this:
-  // ngOnInit(): void {
-  //   this.user$.subscribe(user => {
-  //     if (user) {
-  //       console.log(`User is logged in: ${user.email}`);
-  //       this.router.navigate(['./home']);
-  //     } else {
-  //       console.log('No user is logged in');
-  //     }
-  //   });
-  // }
 }
