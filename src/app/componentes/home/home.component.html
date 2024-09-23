@@ -1,5 +1,10 @@
 <div class="container bg-light rounded mt-3 p-3" xmlns="http://www.w3.org/1999/html">
-  <h1>Bienvenido: {{ usuarioLogueado }}</h1>
+
+  @if (auth.currentUser?.email) {
+    <h1>Bienvenido: {{ auth.currentUser?.email }}</h1>
+  } @else {
+    <h1>Para acceder a los juegos inicie sesión</h1>
+  }
 
   <div class="row row-cols-1 row-cols-md-4 g-4">
 
@@ -7,11 +12,11 @@
       <div class="card h-100">
         <img class="card-img-top"
              src="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/ahorcado.png?alt=media&token=8c057996-9dbd-417a-9db8-a2cbf302ae1a"
-             alt="Ahorcado" >
+             alt="Ahorcado">
         <div class="card-body">
           <h5 class="card-title">Ahorcado</h5>
-          <p class="card-text">Este es el juego del ahorcado</p>
-          <a class="card-link" [routerLink]="['/ahorcado']">Link</a>
+          <p class="card-text">Tenés 6 intentos para adivinar la palabra secreta!</p>
+          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/ahorcado']">Link</a>
         </div>
       </div>
     </div>
@@ -23,8 +28,8 @@
              alt="Preguntados">
         <div class="card-body">
           <h5 class="card-title">Preguntados</h5>
-          <p class="card-text">Este es el juego del preguntados</p>
-          <a class="card-link" [routerLink]="['/preguntados']">Link</a>
+          <p class="card-text">Responde las preguntas para demostrar tu conocimiento!</p>
+          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/preguntados']">Link</a>
         </div>
       </div>
     </div>
@@ -36,8 +41,8 @@
              alt="Mayor o Menor">
         <div class="card-body">
           <h5 class="card-title">Mayor o menor</h5>
-          <p class="card-text">Este es el juego de mayor o menor</p>
-          <a class="card-link" [routerLink]="['/mayoromenor']">Link</a>
+          <p class="card-text">Adivina si la próxima carta es mayor o menor!</p>
+          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/mayoromenor']">Link</a>
         </div>
       </div>
     </div>
@@ -49,8 +54,8 @@
              alt="Juego de Reflejos">
         <div class="card-body">
           <h5 class="card-title">Juego de reflejos</h5>
-          <p class="card-text">Este es el juego de reflejos</p>
-          <a class="card-link" [routerLink]="['/juegodereflejos']">Link</a>
+          <p class="card-text">Demostra tus reflejos con el cursor!</p>
+          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/juegodereflejos']">Link</a>
         </div>
       </div>
     </div>

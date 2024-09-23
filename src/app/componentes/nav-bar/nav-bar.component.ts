@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
-import {Auth, user, signOut} from "@angular/fire/auth";
+import {Auth, signOut} from "@angular/fire/auth";
 import {AsyncPipe, NgIf} from "@angular/common";
-import {map, Observable} from "rxjs";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,7 +18,7 @@ import {map, Observable} from "rxjs";
   styleUrl: './nav-bar.component.less'
 })
 export class NavBarComponent implements OnInit {
-  logueado$!: Observable<boolean>;
+  usuarioLogueado: string | null | undefined;
 
   constructor(
     private router: Router,
@@ -27,13 +27,22 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('nav-bar onInit - email logueado: ' + this.logueado$)
-    this.logueado$ = user(this.auth).pipe(map(user => !!user));  // Updates logueado$ based on user's auth state
+    console.log('nav-bar onInit - email logueado: ' + this.usuarioLogueado)
+    this.usuarioLogueado = this.auth.currentUser?.email;
   }
 
   closeSession(){
     signOut(this.auth).then(() => {
-      this.router.navigate(['../login']);
+      this.showErrorAlert("Logueate para acceder a los juegos");
     })
+  }
+
+  private showErrorAlert(message: string) {
+    Swal.fire({
+      title: 'Cerraste sesión!',
+      text: message,
+      icon: 'error',
+      confirmButtonText: 'Cerrar'
+    });
   }
 }
