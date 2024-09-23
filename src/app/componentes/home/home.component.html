@@ -1,43 +1,57 @@
 <div class="container bg-light rounded mt-3 p-3" xmlns="http://www.w3.org/1999/html">
   <h1>Bienvenido: {{ usuarioLogueado }}</h1>
 
-  <div class="row">
-    <!-- First column -->
-    <div class="col-md-6 mb-3">
-      <div class="p-3 text-white rounded">
-        <a [routerLink]="['/ahorcado']">
-          <img ngSrc="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/ahorcado.png?alt=media&token=8c057996-9dbd-417a-9db8-a2cbf302ae1a" alt="Ahorcado" class="img-fluid rounded" height="1024" width="1024">
-        </a>
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+
+    <div class="col">
+      <div class="card h-100">
+        <img class="card-img-top"
+             src="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/ahorcado.png?alt=media&token=8c057996-9dbd-417a-9db8-a2cbf302ae1a"
+             alt="Ahorcado" >
+        <div class="card-body">
+          <h5 class="card-title">Ahorcado</h5>
+          <p class="card-text">Este es el juego del ahorcado</p>
+          <a class="card-link" [routerLink]="['/ahorcado']">Link</a>
+        </div>
       </div>
     </div>
 
-    <!-- Second column -->
-    <div class="col-md-6 mb-3">
-      <div class="p-3 text-white rounded">
-        <a [routerLink]="['/preguntados']">
-          <img ngSrc="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/preguntados.png?alt=media&token=e0d4c561-d771-4b10-885b-eb21e17d1503" alt="Preguntados" class="img-fluid rounded" height="1024"
-             width="1024">
-        </a>
+    <div class="col">
+      <div class="card h-100">
+        <img class="card-img-top"
+             src="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/preguntados.png?alt=media&token=e0d4c561-d771-4b10-885b-eb21e17d1503"
+             alt="Preguntados">
+        <div class="card-body">
+          <h5 class="card-title">Preguntados</h5>
+          <p class="card-text">Este es el juego del preguntados</p>
+          <a class="card-link" [routerLink]="['/preguntados']">Link</a>
+        </div>
       </div>
     </div>
 
-    <!-- Third column -->
-    <div class="col-md-6 mb-3">
-      <div class="p-3 text-white rounded">
-        <a [routerLink]="['/mayoromenor']">
-          <img ngSrc="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/mayor-o-menor.png?alt=media&token=22588fc5-0ba5-4c7f-be00-59b7215d5bd5" alt="Mayor o Menor" class="img-fluid rounded" height="1024"
-             width="1024">
-        </a>
+    <div class="col">
+      <div class="card h-100">
+        <img class="card-img-top"
+             src="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/mayor-o-menor.png?alt=media&token=22588fc5-0ba5-4c7f-be00-59b7215d5bd5"
+             alt="Mayor o Menor">
+        <div class="card-body">
+          <h5 class="card-title">Mayor o menor</h5>
+          <p class="card-text">Este es el juego de mayor o menor</p>
+          <a class="card-link" [routerLink]="['/mayoromenor']">Link</a>
+        </div>
       </div>
     </div>
 
-    <!-- Fourth column -->
-    <div class="col-md-6 mb-3">
-      <div class="p-3 text-white rounded">
-        <a [routerLink]="['/juegodereflejos']">
-        <img ngSrc="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/juego-de-reflejos.png?alt=media&token=91eb421c-5aa8-45c8-af1f-3a02dd27e199" alt="Juego de Reflejos" class="img-fluid rounded" height="1024"
-             width="1024">
-        </a>
+    <div class="col">
+      <div class="card h-100">
+        <img class="card-img-top"
+             src="https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/juego-de-reflejos.png?alt=media&token=91eb421c-5aa8-45c8-af1f-3a02dd27e199"
+             alt="Juego de Reflejos">
+        <div class="card-body">
+          <h5 class="card-title">Juego de reflejos</h5>
+          <p class="card-text">Este es el juego de reflejos</p>
+          <a class="card-link" [routerLink]="['/juegodereflejos']">Link</a>
+        </div>
       </div>
     </div>
 
