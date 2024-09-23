@@ -1,5 +1,7 @@
 <div class="d-flex align-items-center justify-content-center vh-100">
-  <form class="bg-light rounded p-3">
+  <form class="bg-light rounded p-5 shadow-lg login-form">
+    <h3 class="text-center mb-4">Registrarse</h3>
+
     <div class="form-group mb-3">
       <label class="mb-2" for="email">Email</label>
       <input type="text" class="form-control" id="email" [(ngModel)]="email" name="e">
@@ -15,7 +17,8 @@
       <input type="password" class="form-control" id="passwordCheck" [(ngModel)]="passwordCheck" name="passwordCheck">
     </div>
 
-    <button (click)="register()" class="btn btn-primary btn-space">Registrarse</button>
-
+    <div class="d-grid gap-2">
+      <button (click)="register()" class="btn btn-primary btn-lg shadow-sm mb-2">Registrarse</button>
+    </div>
   </form>
 </div>
