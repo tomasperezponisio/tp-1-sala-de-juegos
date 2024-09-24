@@ -64,6 +64,9 @@ export class LoginService {
         case "auth/email-already-exists":
           this.msjError = "Email ya registrado";
           break;
+          case "auth/email-already-in-use":
+          this.msjError = "Email ya registrado";
+          break;
         case "auth/missing-password":
           this.msjError = "Ingrese una contraseña";
           break;

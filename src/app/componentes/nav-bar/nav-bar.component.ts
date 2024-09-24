@@ -33,12 +33,14 @@ export class NavBarComponent implements OnInit {
 
   closeSession(){
     signOut(this.auth).then(() => {
-      this.showErrorAlert("Logueate para acceder a los juegos");
+      this.showErrorAlert("Logueate para acceder a los juegos").then(() => {
+        this.router.navigate(['/home']);
+      });
     })
   }
 
   private showErrorAlert(message: string) {
-    Swal.fire({
+    return Swal.fire({
       title: 'Cerraste sesión!',
       text: message,
       icon: 'error',

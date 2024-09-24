@@ -59,6 +59,7 @@ export class RegisterComponent {
               this.showErrorAlert(this.msjError);
             });
         } else {
+          console.log('error desde componente: ' + message);
           this.msjError = message;
           this.showErrorAlert(this.msjError);
         }

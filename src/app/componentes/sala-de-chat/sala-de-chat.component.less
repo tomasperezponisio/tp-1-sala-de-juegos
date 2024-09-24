@@ -1,0 +1,51 @@
+/* Main container with a fixed height */
+.chat-container {
+  height: 850px; /* Fixed height of the entire chat container */
+}
+
+/* Flexbox to handle the form and keep input at the bottom */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Scrollable message area */
+.chat-messages {
+  height: 750px; /* Fixed height for the message area */
+  overflow-y: auto; /* Allow vertical scrolling */
+  flex-grow: 1; /* Allows the message area to take the remaining space */
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  background-color: #f8f9fa;
+}
+
+/* Styling for individual messages */
+.message-box {
+  display: inline-block;
+  max-width: 80%; /* Messages take up 80% of the container's width */
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.user-message {
+  background-color: #e1f5fe; /* Slightly different background for user's messages */
+}
+
+.message-box small {
+  font-size: 0.75rem; /* Small font for date */
+  color: #888;
+}
+
+.message-box strong {
+  font-weight: bold;
+  color: #007bff; /* Bold and blue for username */
+}
+
+.message-box span {
+  font-weight: normal;
+}

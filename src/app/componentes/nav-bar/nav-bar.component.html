@@ -16,16 +16,19 @@
           <a class="nav-link" routerLink="home" routerLinkActive="active-route">Home</a>
         </li>
         <li class="nav-item" *ngIf="auth.currentUser?.email">
-          <a class="nav-link" routerLink="ahorcado" routerLinkActive="active-route">Ahorcado</a>
+          <a class="nav-link" routerLink="juegos/ahorcado" routerLinkActive="active-route">Ahorcado</a>
         </li>
         <li class="nav-item" *ngIf="auth.currentUser?.email">
-          <a class="nav-link" routerLink="preguntados" routerLinkActive="active-route">Preguntados</a>
+          <a class="nav-link" routerLink="juegos/preguntados" routerLinkActive="active-route">Preguntados</a>
         </li>
         <li class="nav-item" *ngIf="auth.currentUser?.email">
-          <a class="nav-link" routerLink="mayoromenor" routerLinkActive="active-route">Mayor o Menor</a>
+          <a class="nav-link" routerLink="juegos/mayoromenor" routerLinkActive="active-route">Mayor o Menor</a>
         </li>
         <li class="nav-item" *ngIf="auth.currentUser?.email">
-          <a class="nav-link" routerLink="juegodereflejos" routerLinkActive="active-route">Juego de Reflejos</a>
+          <a class="nav-link" routerLink="juegos/juegodereflejos" routerLinkActive="active-route">Juego de Reflejos</a>
+        </li>
+        <li class="nav-item" *ngIf="auth.currentUser?.email">
+          <a class="nav-link" routerLink="sala-de-chat" routerLinkActive="active-route">Sala de Chat</a>
         </li>
         <li class="nav-item" *ngIf="auth.currentUser?.email">
           <a class="nav-link" routerLink="about">Sobre mí</a>

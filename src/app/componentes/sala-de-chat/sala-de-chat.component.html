@@ -1,0 +1,34 @@
+<div class="container chat-container bg-light rounded mt-3 p-3">
+  <form class="bg-light rounded p-5 shadow-lg login-form d-flex flex-column">
+    <h1>Sala de chat</h1>
+
+    <!-- Chat messages -->
+    <div class="chat-messages form-control shadow-sm mb-3">
+      <div *ngFor="let mensaje of mensajesCollection" class="mb-2 d-flex"
+           [ngClass]="{'justify-content-end': mensaje.usuario === auth.currentUser?.email, 'justify-content-start': mensaje.usuario !== auth.currentUser?.email}">
+
+        <div class="message-box" [ngClass]="{'user-message': mensaje.usuario === auth.currentUser?.email}">
+          <small class="text-muted">({{ mensaje.fecha?.toDate() | date: 'short' }})
+            <strong>{{ mensaje.usuario }}: </strong>
+          </small>
+
+          <div>
+            <span>{{ mensaje.mensaje }}</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Input for new message -->
+    <div class="form-group mb-3">
+      <input type="text" class="form-control shadow-sm" id="mensaje" [(ngModel)]="mensaje" name="mensaje"
+             placeholder="Deja tu mensaje" required>
+    </div>
+
+    <!-- Send button -->
+    <div class="d-grid gap-2">
+      <button (click)="enviarMensaje()" class="btn btn-primary btn-lg shadow-sm mb-2">Enviar</button>
+    </div>
+  </form>
+</div>
