@@ -16,7 +16,7 @@
         <div class="card-body">
           <h5 class="card-title">Ahorcado</h5>
           <p class="card-text">Tenés 6 intentos para adivinar la palabra secreta!</p>
-          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/ahorcado']">Link</a>
+          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/juegos/ahorcado']">Link</a>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
         <div class="card-body">
           <h5 class="card-title">Preguntados</h5>
           <p class="card-text">Responde las preguntas para demostrar tu conocimiento!</p>
-          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/preguntados']">Link</a>
+          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/juegos/preguntados']">Link</a>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
         <div class="card-body">
           <h5 class="card-title">Mayor o menor</h5>
           <p class="card-text">Adivina si la próxima carta es mayor o menor!</p>
-          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/mayoromenor']">Link</a>
+          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/juegos/mayoromenor']">Link</a>
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@
         <div class="card-body">
           <h5 class="card-title">Juego de reflejos</h5>
           <p class="card-text">Demostra tus reflejos con el cursor!</p>
-          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/juegodereflejos']">Link</a>
+          <a *ngIf="auth.currentUser?.email" class="card-link" [routerLink]="['/juegos/juegodereflejos']">Link</a>
         </div>
       </div>
     </div>
