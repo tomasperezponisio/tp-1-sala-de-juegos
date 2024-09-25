@@ -1,3 +1,42 @@
 <div class="container bg-light rounded mt-3 p-3">
   <h1>Ahorcado</h1>
+
+  <!-- Start Game Button -->
+  <div *ngIf="!juegoIniciado">
+    <button (click)="comenzarJuego()" class="btn btn-primary">Iniciar Juego</button>
+  </div>
+
+  <!-- Game UI, shown only after the game has started -->
+  <div *ngIf="juegoIniciado">
+    <div *ngIf="!gameOver">
+      <!-- Display the score -->
+      <h3>Puntuación: {{ score }}</h3>
+
+      <!-- Display the word with underscores for unguessed letters -->
+      <h2>
+        <span *ngFor="let letter of palabraOculta">{{ letter }} </span>
+      </h2>
+
+      <!-- Input for guessing letters -->
+      <div class="guess-input">
+        <h3>Adivina una letra:</h3>
+        <input type="text" maxlength="1" #letterInput
+               (keyup.enter)="adivinarLetra(letterInput.value); letterInput.value=''">
+      </div>
+
+      <!-- Display incorrect guesses -->
+      <p>Errores: {{ errores }} / {{ maximoDeIntentos }}</p>
+
+      <!-- Display already guessed letters -->
+      <div *ngIf="letrasUsadas.length > 0">
+        <p>Letras usadas: {{ letrasUsadas.join(', ') }}</p>
+      </div>
+    </div>
+
+    <!-- Game over message -->
+    <div *ngIf="gameOver">
+      <h2>{{ mensaje }}</h2>
+      <button (click)="reiniciarJuego()" class="btn btn-primary">Jugar de nuevo</button>
+    </div>
+  </div>
 </div>
