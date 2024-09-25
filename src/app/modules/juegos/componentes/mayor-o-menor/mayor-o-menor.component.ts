@@ -68,7 +68,7 @@ export class MayorOMenorComponent implements OnInit {
         if (valorProximo === valorActual) {
           this.mensaje = 'Perdiste! Las cartas eran iguales.';
           this.gameOver = true;
-          this.guardaPuntaje();
+          this.guardaPuntaje(this.puntaje, 'mayor-o-menor');
 
         } else if (
           (adivinar === 'mayor' && valorProximo > valorActual) ||
@@ -80,7 +80,7 @@ export class MayorOMenorComponent implements OnInit {
         } else {
           this.mensaje = `Perdiste! La próxima carta era ${this.traducirValorCarta(this.cartaProxima.value)} de ${this.traducirPaloCarta(this.cartaProxima.suit)}.`;
           this.gameOver = true;
-          this.guardaPuntaje();
+          this.guardaPuntaje(this.puntaje, 'mayor-o-menor');
 
         }
       }
@@ -159,9 +159,9 @@ export class MayorOMenorComponent implements OnInit {
   /**
    * Guarda el puntaje del jugador
    */
-  async guardaPuntaje() {
+  async guardaPuntaje(puntaje: number, juego: string) {
     try {
-      await this.puntajesService.guardarPuntaje(this.puntaje, 'mayor-o-menor');
+      await this.puntajesService.guardarPuntaje(puntaje, juego);
       console.log('Puntaje guardado exitosamente');
     } catch (error) {
       console.error('Error al guardar el puntaje: ', error);

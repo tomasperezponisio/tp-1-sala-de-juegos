@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {palabras} from './palabras';
+import {PuntajesService} from '../../../../services/puntajes.service'
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-ahorcado',
@@ -7,7 +9,7 @@ import {palabras} from './palabras';
   styleUrl: './ahorcado.component.less'
 })
 export class AhorcadoComponent {
-
+  imrUrlBase: string = 'https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o';
   palabra: string = '';  // The random word to guess
   letrasUsadas: string[] = [];  // Letters the player has guessed
   palabraOculta: string[] = [];  // Word display with underscores
@@ -16,7 +18,15 @@ export class AhorcadoComponent {
   gameOver: boolean = false;  // Tracks if the game is over
   mensaje: string = '';  // Game over message
   juegoIniciado: boolean = false;  // Track whether the game has started
-  score: number = 0;  // Track the player's score
+  puntaje: number = 0;  // Track the player's score
+
+  // Alphabet for the on-screen keyboard
+  abecedario: string[] = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.toLowerCase().split('');
+
+  constructor(
+    private puntajesService: PuntajesService
+  ) {
+  }
 
   // Start a new game
   comenzarJuego() {
@@ -46,26 +56,73 @@ export class AhorcadoComponent {
         }
       }
 
-      // Check if the player has won
+      // Valida si el jugador ganó
       if (!this.palabraOculta.includes('_')) {
-        this.score++;  // Increase score for a correct word
-        this.mensaje = `¡Felicidades! Has adivinado la palabra. Puntos: ${this.score}`;
-        this.comenzarJuego();  // Automatically start a new word
+        this.puntaje++;  // Increase score for a correct word
+        this.mensaje = `La palabra era: ${this.palabra}. Puntos acumulados: ${this.puntaje}`;
+        this.showSuccessAlert(this.mensaje).then(() => {
+          this.comenzarJuego();
+        });
       }
     } else {
-      // Incorrect guess
+      // Errores
       this.errores++;
       if (this.errores >= this.maximoDeIntentos) {
-        this.gameOver = true;
-        this.mensaje = `Has perdido. La palabra era: ${this.palabra}. Puntos finales: ${this.score}`;
+        this.mensaje = `La palabra era: ${this.palabra}. Puntos finales: ${this.puntaje}`;
+        this.showErrorAlert(this.mensaje).then(() => {
+          this.guardaPuntaje(this.puntaje, 'ahorcado');
+          this.gameOver = true;
+        });
       }
     }
   }
 
-  // Reset the game
+  /**
+   * Reinicia el juego
+   */
   reiniciarJuego() {
-    this.score = 0;  // Reset the score
+    this.puntaje = 0;  // Reset the score
     this.comenzarJuego();
+  }
+
+  /**
+   * Muestra mensaje de exito
+   * @param message
+   * @private
+   */
+  private showSuccessAlert(message: string) {
+    return Swal.fire({
+      title: 'Ganaste!',
+      text: message,
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+  }
+
+  /**
+   * Muestra mensaje de error
+   * @param message
+   * @private
+   */
+  private showErrorAlert(message: string) {
+    return Swal.fire({
+      title: 'Perdiste!',
+      text: message,
+      icon: 'error',
+      confirmButtonText: 'Cerrar'
+    });
+  }
+
+  /**
+   * Guarda el puntaje del jugador
+   */
+  async guardaPuntaje(puntaje: number, juego: string) {
+    try {
+      await this.puntajesService.guardarPuntaje(puntaje, juego);
+      console.log('Puntaje guardado exitosamente');
+    } catch (error) {
+      console.error('Error al guardar el puntaje: ', error);
+    }
   }
 
 }

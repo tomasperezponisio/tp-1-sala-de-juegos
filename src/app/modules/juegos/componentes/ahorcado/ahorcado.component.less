@@ -1,3 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: white;
+}
+
+.keyboard {
+  width: 600px;
+}
+
 h1, h2 {
   margin-bottom: 20px;
 }
@@ -19,3 +32,53 @@ button {
 p {
   font-size: 1.25rem;
 }
+.hangman-container {
+  padding-top: 220px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transform: scale(0.5); /* Scale down by 50% */
+  transform-origin: top; /* Keep the top as the anchor */
+}
+
+/* Center the sections for the hangman body */
+.hangman-section-2, .hangman-section-3 {
+  display: flex;
+  justify-content: center;
+}
+
+.head {
+  width: 232px;
+  height: 144px;
+}
+
+.left-arm {
+  width: 99px;
+  height: 200px;
+}
+
+.torso {
+  width: 27px;
+  height: 200px;
+}
+
+.right-arm {
+  width: 106px;
+  height: 200px;
+}
+
+.left-leg {
+  width: 112px;
+  height: 163px;
+}
+
+.right-leg {
+  width: 120px;
+  height: 163px;
+}
+
+
+
