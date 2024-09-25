@@ -23,6 +23,7 @@ export class MayorOMenorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.comenzarJuego();
   }
 
@@ -30,6 +31,7 @@ export class MayorOMenorComponent implements OnInit {
    * Comienza un nuevo juego creando un mazo y sacando una carta
    */
   comenzarJuego() {
+    this.loading = true;
     this.deckService.crearMazo().subscribe((data) => {
       this.deckId = data.deck_id;
       this.sacarCarta();
