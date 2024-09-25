@@ -1,9 +1,12 @@
 .container {
-  margin-top: 20px;
+  background: url("https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/background-cards-3-darken%20.webp?alt=media&token=a606706b-3dbf-48c7-baf7-da2bc019b75b");
+  background-size: cover; /* Resize image to cover the container */
+  height: 500px;
+  max-width: 800px;
 }
 
-h1, h2 {
-  margin-bottom: 20px;
+h1, h2, h3 {
+  color: white;
 }
 
 .buttons {
@@ -14,4 +17,31 @@ img {
   width: 150px;
   height: auto;
   margin-bottom: 20px;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.card-spinner-container {
+  height: 250px; /* Set the height to match the card's typical height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
