@@ -1,23 +1,34 @@
-<div class="container bg-light rounded mt-3 p-3">
+<div class="container bg-light rounded mt-3 pt-3 pb-4 d-flex flex-column align-items-center">
   <h1>Mayor o Menor</h1>
 
-  <div *ngIf="gameOver">
+  <div *ngIf="gameOver" class="text-center">
     <h2>{{ mensaje }}</h2>
     <img *ngIf="cartaProxima" [src]="cartaProxima.image" alt="{{ cartaProxima.value }} of {{ cartaProxima.suit }}"/>
 
   </div>
 
-  <div *ngIf="!gameOver">
+  <div *ngIf="!gameOver" class="text-center">
     <h2>Carta actual</h2>
-    <img *ngIf="cartaActual" [src]="cartaActual.image" alt="{{ cartaActual.value }} of {{ cartaActual.suit }}"/>
+
+    <div class="card-spinner-container">
+      <div *ngIf="loading; else card">
+        <span class="loader"></span>
+      </div>
+      <ng-template #card>
+        <img *ngIf="cartaActual" [src]="cartaActual.image" alt="{{ cartaActual.value }} of {{ cartaActual.suit }}"/>
+      </ng-template>
+    </div>
+
     <h3>Puntaje: {{ puntaje }}</h3>
 
-    <div class="buttons">
-      <button (click)="adivinarCarta('mayor')" class="btn btn-success">Mayor</button>
-      <button (click)="adivinarCarta('menor')" class="btn btn-danger">Menor</button>
+    <div class="buttons d-flex justify-content-center">
+      <button (click)="adivinarCarta('mayor')" class="btn btn-success m-1" [disabled]="loading">Mayor</button>
+      <button (click)="adivinarCarta('menor')" class="btn btn-danger m-1" [disabled]="loading">Menor</button>
     </div>
+
   </div>
-  <div *ngIf="gameOver">
+  <div *ngIf="gameOver" class="text-center">
+    <h3>Tu puntaje fue de: {{ puntaje }}</h3>
     <button (click)="reiniciarJuego()" class="btn btn-primary mt-3">Empezar un juego nuevo</button>
   </div>
 

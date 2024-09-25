@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DeckService} from '../../../../services/mazo-de-cartas.service';
-import Swal from "sweetalert2";
+import {PuntajesService} from '../../../../services/puntajes.service';
 
 @Component({
   selector: 'app-mayor-o-menor',
@@ -14,9 +14,11 @@ export class MayorOMenorComponent implements OnInit {
   puntaje: number = 0;
   gameOver: boolean = false;
   mensaje: string = '';
+  loading: boolean = false;
 
   constructor(
-    private deckService: DeckService
+    private deckService: DeckService,
+    private puntajesService: PuntajesService
   ) {
   }
 
@@ -41,6 +43,7 @@ export class MayorOMenorComponent implements OnInit {
     this.deckService.sacarCarta(this.deckId).subscribe((data) => {
       if (data.cards && data.cards.length > 0) {
         this.cartaActual = data.cards[0];
+        this.loading = false;
       }
     });
   }
@@ -52,6 +55,7 @@ export class MayorOMenorComponent implements OnInit {
    * @param adivinar
    */
   adivinarCarta(adivinar: 'mayor' | 'menor') {
+    this.loading = true;
     this.deckService.sacarCarta(this.deckId).subscribe((data) => {
       if (data.cards && data.cards.length > 0) {
         this.cartaProxima = data.cards[0];  // se asigna a cartaProxima para comparar
@@ -62,6 +66,7 @@ export class MayorOMenorComponent implements OnInit {
         if (valorProximo === valorActual) {
           this.mensaje = 'Perdiste! Las cartas eran iguales.';
           this.gameOver = true;
+          this.guardaPuntaje();
 
         } else if (
           (adivinar === 'mayor' && valorProximo > valorActual) ||
@@ -73,8 +78,11 @@ export class MayorOMenorComponent implements OnInit {
         } else {
           this.mensaje = `Perdiste! La próxima carta era ${this.traducirValorCarta(this.cartaProxima.value)} de ${this.traducirPaloCarta(this.cartaProxima.suit)}.`;
           this.gameOver = true;
+          this.guardaPuntaje();
+
         }
       }
+      this.loading = false;
     });
   }
 
@@ -123,6 +131,8 @@ export class MayorOMenorComponent implements OnInit {
    */
   traducirValorCarta(valor: string): string {
     switch (valor) {
+      case 'ACE':
+        return 'As';
       case 'JACK':
         return 'Sota';
       case 'QUEEN':
@@ -142,5 +152,17 @@ export class MayorOMenorComponent implements OnInit {
     this.gameOver = false;
     this.mensaje = '';
     this.comenzarJuego();
+  }
+
+  /**
+   * Guarda el puntaje del jugador
+   */
+  async guardaPuntaje() {
+    try {
+      await this.puntajesService.guardarPuntaje(this.puntaje, 'mayor-o-menor');
+      console.log('Puntaje guardado exitosamente');
+    } catch (error) {
+      console.error('Error al guardar el puntaje: ', error);
+    }
   }
 }
