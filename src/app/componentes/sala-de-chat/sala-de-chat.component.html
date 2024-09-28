@@ -3,7 +3,7 @@
     <h1>Sala de chat</h1>
 
     <!-- Chat messages -->
-    <div class="chat-messages form-control shadow-sm mb-3">
+    <div class="chat-messages form-control shadow-sm mb-3" #chatMessages>
       <div *ngFor="let mensaje of mensajesCollection" class="mb-2 d-flex"
            [ngClass]="{'justify-content-end': mensaje.usuario === auth.currentUser?.email, 'justify-content-start': mensaje.usuario !== auth.currentUser?.email}">
 
