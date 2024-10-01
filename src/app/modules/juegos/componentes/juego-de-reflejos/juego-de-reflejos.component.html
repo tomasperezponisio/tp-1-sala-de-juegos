@@ -1,3 +1,36 @@
-<div class="container bg-light rounded mt-3 p-3">
-  <h1>Juego de reflejos</h1>
+<div class="container text-center bg-light rounded mt-3 p-3">
+  <h1>Juego de Reflejos</h1>
+  <div *ngIf="!gameOver">
+    <h3>Tiempo restante: {{ tiempoRestante }}s</h3>
+    <h4>Puntaje: {{ puntaje }}</h4>
+
+    <!-- Botón que se mueve aleatoriamente -->
+    <button
+      class="btn btn-warning position-absolute rounded-pill p-0"
+      *ngIf="mostrarBoton"
+      [ngStyle]="{'top.px': posicionY, 'left.px': posicionX}"
+      [ngClass]="{'zoom-in': mostrarBoton, 'zoom-out': !mostrarBoton}"
+      (click)="onButtonClick()">
+      <img [src]=goodSmileyImg alt="Good Smiley" style="width: 80px; height: 80px;"
+           height="374" width="374">
+    </button>
+
+    <!-- Cuadrados falsos (obstáculos) que no se deben clickear -->
+    <div
+      class="obstacle position-absolute bg-danger rounded-pill p-0"
+      *ngFor="let obstacle of obstaculos"
+      [ngStyle]="{'top.px': obstacle.y, 'left.px': obstacle.x}"
+      [ngClass]="{'zoom-in': obstacle.isVisible, 'zoom-out': !obstacle.isVisible}"
+      (click)="alClickearUnObstaculo()">
+      <img [src]=badSmileyImg alt="Bad Smiley" style="width: 80px; height: 80px;" height="374"
+           width="374">
+    </div>
+  </div>
+
+  <!-- Mensaje final cuando termina el juego -->
+  <div *ngIf="gameOver">
+    <h3>¡Juego terminado!</h3>
+    <p>Tu puntaje final es: {{ puntaje }}</p>
+    <button class="btn btn-primary" (click)="empezarJuego()">Jugar de nuevo</button>
+  </div>
 </div>
