@@ -1,0 +1,64 @@
+.container {
+  text-align: center;
+  margin-top: 50px;
+  height: 500px;
+  background: url("https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/background-preguntados%20.webp?alt=media&token=0479a885-2b63-45dc-a093-1d503a13473e");
+  background-size: cover; /* Resize image to cover the container */
+}
+
+h1 {
+  display: inline-block;
+}
+
+.personaje-image-container {
+  height: 300px;
+}
+
+.character-image img {
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+.options button {
+  font-size: 18px;
+  width: 200px;
+  margin: 10px;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: block;
+  margin:15px auto;
+  position: relative;
+  box-sizing: border-box;
+  animation: zeroRotation 1s linear infinite alternate;
+}
+.loader::after,
+.loader::before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #FF3D00;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+}
+.loader::before {
+  left: auto;
+  right: 0;
+  transform: translate(50%, 100%);
+}
+
+@keyframes zeroRotation {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+  }
+}

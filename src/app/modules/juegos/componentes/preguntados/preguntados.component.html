@@ -1,3 +1,30 @@
-<div class="container bg-light rounded mt-3 p-3">
-  <h1>Preguntados</h1>
+<div class="container trivia-container bg-light rounded mt-3 p-3">
+  <h1 class="rounded-2 bg-light p-2">Preguntados</h1>
+
+  <div *ngIf="!juegoEmpezado">
+    <button (click)="startGame()" class="btn btn-primary btn-lg">Iniciar Juego</button>
+  </div>
+
+  <div *ngIf="juegoEmpezado">
+
+    <div class="personaje-image-container">
+      <div *ngIf="cargando; else personaje">
+        <span class="loader"></span>
+      </div>
+      <ng-template #personaje>
+        <div class="character-image">
+          <img [src]="imagenPersonaje" alt="Character" class="img-fluid"/>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="options">
+      <button *ngFor="let opcion of opciones" (click)="adivinarPersonaje(opcion)" class="btn btn-primary m-2">
+        {{ opcion }}
+      </button>
+    </div>
+
+  </div>
+
+
 </div>
