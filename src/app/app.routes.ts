@@ -5,6 +5,7 @@ import {HomeComponent} from "./componentes/home/home.component";
 import {AboutComponent} from "./componentes/about/about.component";
 import {ErrorPageComponent} from "./componentes/error-page/error-page.component";
 import {SalaDeChatComponent} from "./componentes/sala-de-chat/sala-de-chat.component";
+import {PuntajesMaximosComponent} from "./componentes/puntajes-maximos/puntajes-maximos.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: "full"},
@@ -14,5 +15,6 @@ export const routes: Routes = [
   {path: "about", component: AboutComponent},
   {path: 'juegos', loadChildren:() => import('./modules/juegos/juegos.module').then(m => m.JuegosModule)},
   {path: 'sala-de-chat', component: SalaDeChatComponent},
+  {path: 'puntajes-maximos', component: PuntajesMaximosComponent},
   {path: '**', component: ErrorPageComponent},
 ];
