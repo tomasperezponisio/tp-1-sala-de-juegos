@@ -1,0 +1,40 @@
+<div class="container bg-light rounded mt-3 p-3">
+  <h1>Top 10 en: {{nombreDeJuego}} </h1>
+
+  <div *ngIf="puntajesMaximos.length > 0; else noData">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Email</th>
+        <th>Puntaje</th>
+        <th>Fecha</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let score of puntajesMaximos; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>
+          <span *ngIf="i === 0">🥇</span>
+          <span *ngIf="i === 1">🥈</span>
+          <span *ngIf="i === 2">🥉</span>
+          {{ score.email }}</td>
+        <td>{{ score.puntaje }}</td>
+        <td>{{ score.fecha?.toDate() | date: 'short' }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <p>No hay puntajes registrados para este juego</p>
+  </ng-template>
+
+  <select [(ngModel)]="juegoSeleccionado" (change)="alCambiarDejuego(juegoSeleccionado)" class="form-control">
+    <option value="mayor-o-menor">Mayor o Menor</option>
+    <option value="ahorcado">Ahorcado</option>
+    <option value="preguntados">Preguntados</option>
+    <option value="juego-de-reflejos">Juego de Reflejos</option>
+  </select>
+
+</div>
