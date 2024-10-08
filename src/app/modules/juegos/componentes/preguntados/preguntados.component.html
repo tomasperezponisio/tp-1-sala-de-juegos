@@ -1,8 +1,12 @@
 <div class="container trivia-container bg-light rounded mt-3 p-3">
   <h1 class="rounded-2 bg-light p-2">Preguntados</h1>
 
+  <div *ngIf="juegoEmpezado">
+    <h3 class="rounded bg-light p-2">Puntaje: {{puntaje}}</h3>
+  </div>
+
   <div *ngIf="!juegoEmpezado">
-    <button (click)="startGame()" class="btn btn-primary btn-lg">Iniciar Juego</button>
+    <button (click)="iniciarJuego()" class="btn btn-primary btn-lg">Iniciar Juego</button>
   </div>
 
   <div *ngIf="juegoEmpezado">
@@ -18,7 +22,7 @@
       </ng-template>
     </div>
 
-    <div class="options">
+    <div class="options mt-3">
       <button *ngFor="let opcion of opciones" (click)="adivinarPersonaje(opcion)" class="btn btn-primary m-2">
         {{ opcion }}
       </button>

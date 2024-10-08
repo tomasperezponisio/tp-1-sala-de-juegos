@@ -32,7 +32,7 @@ export class PreguntadosComponent implements OnInit {
    *
    * @return {void}
    */
-  startGame() {
+  iniciarJuego(): void {
     this.cargando = true;
     this.juegoEmpezado = true;
     this.cargarPersonajes();
@@ -43,7 +43,7 @@ export class PreguntadosComponent implements OnInit {
    * Genera una pregunta
    * @return {void}
    */
-  cargarPersonajes() {
+  cargarPersonajes(): void {
     console.log('entro a loadCharacters');
     this.simpsonsService.getAllCharacters().subscribe(data => {
       this.todosLosPersonajes = data.docs;
@@ -57,7 +57,7 @@ export class PreguntadosComponent implements OnInit {
    * Se generan dos opciones incorrectas y se mezclan con la correcta
    * @return {void}
    */
-  generarPregunta() {
+  generarPregunta(): void {
     console.log('entro a generateQuestion');
 
     const indiceAleatorio = Math.floor(Math.random() * this.todosLosPersonajes.length);
