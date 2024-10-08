@@ -34,6 +34,9 @@
           <a class="nav-link" routerLink="puntajes-maximos" routerLinkActive="active-route">Puntajes Máximos</a>
         </li>
         <li class="nav-item" *ngIf="auth.currentUser?.email">
+          <a class="nav-link" routerLink="encuesta" routerLinkActive="active-route">Encuesta</a>
+        </li>
+        <li class="nav-item" *ngIf="auth.currentUser?.email">
           <a class="nav-link" routerLink="about">Sobre mí</a>
         </li>
       </ul>
