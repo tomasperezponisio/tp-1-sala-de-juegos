@@ -1,58 +1,36 @@
 <div class="container rounded mt-3 p-3">
   <h1>Ahorcado</h1>
 
-  <div class="hangman-container">
-    <div class="head" >
-      <img *ngIf="errores > 0" src="{{imrUrlBase}}/000.png?alt=media&token=058c3d8a-ea10-4ba1-8861-e5631674fb04"
-           alt="head">
+  <div class="hangman-container-full-images rounded p-3 bg-light">
+
+    <!-- Muestra las imagenes del ahorcado segun la cantidad de errores -->
+    <div class="hangman-container-full-images">
+      <img [src]="imgUrls[errores]" alt="hangman-step" class="img-fluid"/>
     </div>
-    <div class="hangman-section-2">
-      <div class="left-arm" >
-        <img *ngIf="errores > 2" src="{{imrUrlBase}}/001.png?alt=media&token=50a6fa13-3b91-44b6-81f3-3e1fa961db8d"
-             alt="left arm">
-      </div>
-      <div class="torso" >
-        <img *ngIf="errores > 1" src="{{imrUrlBase}}/002.png?alt=media&token=b66a5e6d-7beb-46ac-869f-1c253aac3282"
-             alt="torso">
-      </div>
-      <div class="right-arm" >
-        <img *ngIf="errores > 3" src="{{imrUrlBase}}/003.png?alt=media&token=d76f6133-69a7-4c07-968d-b6473146ccb3"
-             alt="right arm">
-      </div>
-    </div>
-    <div class="hangman-section-3">
-      <div class="left-leg" >
-        <img *ngIf="errores > 4" src="{{imrUrlBase}}/004.png?alt=media&token=02629a8e-b933-460b-abd8-899f4631b142"
-             alt="left leg">
-      </div>
-      <div class="right-leg" >
-        <img *ngIf="errores > 5" src="{{imrUrlBase}}/005.png?alt=media&token=e3bed17b-7b4a-408b-b73a-efd0492441b2"
-             alt="right leg">
-      </div>
-    </div>
+
   </div>
 
-  <!-- Start Game Button -->
+  <!-- Boton de inicio de juego -->
   <div *ngIf="!juegoIniciado">
     <button (click)="comenzarJuego()" class="btn btn-primary">Iniciar Juego</button>
   </div>
 
-  <!-- Game UI, shown only after the game has started -->
+  <!-- Interfaz del juego una vez iniciado -->
   <div *ngIf="juegoIniciado">
     <div *ngIf="!gameOver">
       <!-- Display the score -->
-      <h3>Puntuación: {{ puntaje }}</h3>
+      <h3 class="mt-2 bg-light rounded p-2">Puntuación: {{ puntaje }}</h3>
 
-      <!-- Display the word with underscores for unguessed letters -->
+      <!-- Muestra la palabra oculta con _ -->
       <h2>
         <span *ngFor="let letter of palabraOculta">{{ letter }} </span>
       </h2>
 
-      <!-- On-Screen Keyboard -->
+      <!-- Teclado en pantalla -->
       <div class="keyboard">
         <h3>Adivina una letra:</h3>
         <div class="d-flex flex-wrap justify-content-center">
-          <!-- Create buttons for each letter -->
+          <!-- Crea los botones para cada letra -->
           <button
             *ngFor="let letter of abecedario"
             class="btn btn-secondary m-1"
@@ -63,16 +41,16 @@
         </div>
       </div>
 
-      <!-- Display incorrect guesses -->
+      <!-- Muestra los errores -->
       <p>Errores: {{ errores }} / {{ maximoDeIntentos }}</p>
 
-      <!-- Display already guessed letters -->
+      <!-- Muestra las letras usadas -->
       <div *ngIf="letrasUsadas.length > 0">
         <p>Letras usadas: {{ letrasUsadas.join(', ') }}</p>
       </div>
     </div>
 
-    <!-- Game over message -->
+    <!-- Mensaje de fin de juego -->
     <div *ngIf="gameOver">
       <h2>{{ mensaje }}</h2>
       <button (click)="reiniciarJuego()" class="btn btn-primary">Jugar de nuevo</button>
