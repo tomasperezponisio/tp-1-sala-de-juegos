@@ -1,18 +1,43 @@
 .container {
+  max-width: 900px;
+  margin: auto;
+  background: url("https://firebasestorage.googleapis.com/v0/b/tp1-sala-de-juegos.appspot.com/o/juego-de-reflejos-v2.webp?alt=media&token=0a607cd6-041f-472b-ab28-a4d753f5348c");
+  background-size: cover;
+}
+
+h1, h2, h3, h4, p {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: inline-block;
+}
+
+.game-info {
+  /* Aligns the game information at the top of the container */
+  padding-bottom: 20px;
+}
+
+.game-area {
+  /* Fixed height for the game area, with position relative to contain the obstacles and button */
+  height: 400px;
+  border: 1px solid #000;
+  background-color: rgba(0, 0, 0, 0.7);
   position: relative;
-  height: 600px; /* Altura del área de juego */
+
+  button {
+
+    & .jugadores {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  .obstacle {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+  }
 }
 
-button {
-  width: 80px;
-  height: 80px;
-}
-
-.obstacle {
-  width: 80px;
-  height: 80px;
-  cursor: pointer;
-}
 
 /* Define keyframes for zoom-in and zoom-out */
 @keyframes zoomIn {
