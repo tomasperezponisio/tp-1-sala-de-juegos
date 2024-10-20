@@ -12,7 +12,7 @@
           <small class="text-danger">Sólo debe contener solo letras</small>
         </ng-container>
 
-        <ng-container *ngIf="nombre?.hasError('required')">
+        <ng-container *ngIf="nombre?.hasError('required') && nombre?.touched">
           <small class="text-danger">Este campo es obligatorio</small>
         </ng-container>
 
@@ -26,7 +26,7 @@
           <small class="text-danger">Sólo debe contener solo letras</small>
         </ng-container>
 
-        <ng-container *ngIf="apellido?.hasError('required')">
+        <ng-container *ngIf="apellido?.hasError('required') && apellido?.touched">
           <small class="text-danger">Este campo es obligatorio</small>
         </ng-container>
 
@@ -55,11 +55,11 @@
         <label class="form-label" for="telefono">Telefono</label>
         <input type="text" class="form-control" id="telefono" formControlName="telefono">
 
-        <ng-container *ngIf="telefono?.hasError('pattern') && telefono?.touched">
+        <ng-container *ngIf="telefono?.hasError('pattern')">
           <small class="text-danger">Debe contener exactamente 10 dígitos numéricos</small>
         </ng-container>
 
-        <ng-container *ngIf="telefono?.hasError('required')">
+        <ng-container *ngIf="telefono?.hasError('required') && telefono?.touched">
           <small class="text-danger">Este campo es obligatorio</small>
         </ng-container>
 
@@ -69,12 +69,14 @@
     <div class="row">
       <div class="form-control-group col-5">
         <label class="form-label">Alumno regular</label>
-        <label>
-          <input type="radio" class="form-control" formControlName="alumnoRegular" value="yes"> Yes
-        </label>
-        <label>
-          <input type="radio" class="form-control" formControlName="alumnoRegular" value="no"> No
-        </label>
+        <div class="form-check">
+          <input id="yes" formControlName="alumnoRegular" type="radio" class="form-check-input" value="yes" checked required>
+          <label class="form-check-label" for="yes">Si</label>
+        </div>
+        <div class="form-check">
+          <input id="no" formControlName="alumnoRegular" type="radio" class="form-check-input" value="no" required>
+          <label class="form-check-label" for="no">No</label>
+        </div>
 
         <ng-container *ngIf="alumnoRegular?.hasError('required') && alumnoRegular?.touched">
           <small class="text-danger">Este campo es obligatorio.</small>
@@ -85,23 +87,30 @@
       <div class="form-control-group col-5">
         <label class="form-label">Lenguajes</label>
         <div [formGroup]="lenguajes">
-          <label>
-            <input type="checkbox" formControlName="c"> C
-          </label>
-          <label>
-            <input type="checkbox" formControlName="csharp"> C#
-          </label>
-          <label>
-            <input type="checkbox" formControlName="php"> PHP
-          </label>
-          <label>
-            <input type="checkbox" formControlName="js"> JavaScript
-          </label>
-          <label>
-            <input type="checkbox" formControlName="python"> Python
-          </label>
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="csharp" formControlName="csharp">
+            <label class="form-check-label" for="csharp">C#</label>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="php" formControlName="php">
+            <label class="form-check-label" for="php">PHP</label>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="javascript" formControlName="javascript">
+            <label class="form-check-label" for="javascript">Javascript</label>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="python" formControlName="python">
+            <label class="form-check-label" for="python">Python</label>
+          </div>
+
         </div>
       </div>
+
     </div>
 
     <div class="row">
@@ -122,7 +131,7 @@
       </ng-container>
     </div>
 
-    <button type="submit" class="btn btn-primary w-25 mt-4">
+    <button type="submit" class="btn btn-primary w-25 mt-4" [disabled]="form.invalid">
       Enviar
     </button>
 
